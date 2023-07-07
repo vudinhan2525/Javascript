@@ -101,6 +101,7 @@ getComment()
                     name: NameAdded,
                     description: DescriptionAdded
                 });
+                CourseAdded.innerText = "Create";
             }
         }
     }
@@ -157,8 +158,6 @@ getComment()
                 .then((courses) => {
                     getCourse();
                 });
-        var CreateBtn = document.querySelector('.create-button');
-        CreateBtn.innerText = "Create";
    }
    function renderCourses(courses){
         var htmls = courses.map((course) => {
