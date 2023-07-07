@@ -1,0 +1,33 @@
+*{
+    padding:0;
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.hidden{
+    display: none !important;
+}
+.box{
+    display: flex;
+    position: absolute;
+    top:100px;
+    right:50px;
+    max-width: 500px;
+    height:70px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.title{
+    padding:12px;
+    background-color: #04AA6D;
+    color:#fff;
+    line-height: 20px;
+}
+.description{
+    padding:12px;
+    background-color: #04AA6D;
+    line-height: 20px;
+    color:#fff;
+}
+.course-box h1{
+    font-size: 27px;
+}
