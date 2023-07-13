@@ -1,5 +1,6 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+const USER_CONFIG = "User-config";
 const Playlist = $('.playlist');
 let Songs = $$('.song');
 const Heading = $('.header--title');
@@ -22,6 +23,11 @@ const app = {
     IndexCurrentSong: 0,
     RandomSongVisited: [],
     RandomSongVisitedCnt: 0,
+    getConfig: JSON.parse(localStorage.getItem(USER_CONFIG)) || {},
+    setConfig: function(key,value){
+        this.getConfig[key] = value;
+        localStorage.setItem(USER_CONFIG,JSON.stringify(this.getConfig));
+    },
     songs: [
         {
             name: "Nghe như tình yêu",
@@ -169,7 +175,6 @@ const app = {
         Progress.onchange = function(){
             audio.muted = false;
         };
-
         //Next Song
         BtnNext.onclick = function(){
             if(BtnRandom.classList.contains('active')){
@@ -209,6 +214,12 @@ const app = {
         // Random Song
         BtnRandom.onclick = function(){
             BtnRandom.classList.toggle('active');
+            if(BtnRandom.classList.contains('active')){
+                app.setConfig('BtnRandom','active');
+            }
+            else{
+                app.setConfig('BtnRandom','no-active');
+            }
         };
 
         // Xử lý nextSong khi audio ended
@@ -220,9 +231,11 @@ const app = {
             BtnReplay.classList.toggle('active');
             if(BtnReplay.classList.contains('active')){
                 audio.loop = true;
+                app.setConfig('BtnReplay','active');
             }
             else{
                 audio.loop = false;
+                app.setConfig('BtnReplay','no-active');
             }
         };
         //Change Song when click
@@ -314,7 +327,18 @@ const app = {
             CurrentSongActive.classList.add('active');
         }
     },
+    loadConfig: function(){
+        if(app.getConfig['BtnRandom'] === "active"){
+            BtnRandom.classList.toggle('active');
+        }
+        if(app.getConfig['BtnReplay'] === "active"){
+            BtnReplay.classList.toggle('active');
+            audio.loop = true;
+        }
+    },
     start: function(){
+        //load config
+        app.loadConfig();
         //define Properties
         this.defineProperties();
         // Load bài đầu tiên UX
