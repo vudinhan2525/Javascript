@@ -93,6 +93,7 @@ body{
     position: relative;
 }
 .progress{
+    -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
     width: 100%;

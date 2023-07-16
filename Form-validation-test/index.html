@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <form class="form-box" id = "form-1">
+        <div class="form-heading">
+            <h3>Thành viên đăng ký</h3>
+            <p>Cùng nhau học lập trình miễn phí tại F8 ❤️</p>
+        </div>
+        <div class="form-group form-name">
+            <h5 class="form-description">Tên đầy đủ</h5>
+            <input type="text" id = "fullname" name = "fullname" class="form-input" placeholder="VD:An Vũ">
+            <p class="form-msg"></p>
+        </div>
+        <div class="form-group form-email">
+            <h5 class="form-description">Email</h5>
+            <input type="text" id = "email" name = "email" class="form-input" placeholder="VD: email@domain.com">
+            <p class="form-msg"></p>
+        </div>
+        <div class="form-group form-password">
+            <h5 class="form-description">Mật khẩu</h5>
+            <input type="password" id = "password" name = "password" class="form-input"  placeholder="Nhập mật khẩu">
+            <p class="form-msg"></p>
+        </div>
+        <div class="form-group form-password-repeat">
+            <h5 class="form-description">Nhập lại mật khẩu</h5>
+            <input type="password" id = "password-repeat" name = "password-repeat" class="form-input"  placeholder="Nhập lại mật khẩu">
+            <p class="form-msg"></p>
+        </div>
+        <div class="form-group form-avatar">
+            <h5 class="form-description">Ảnh đại diện</h5>
+            <input type="file" id = "avatar" name = "avatar" class="form-input" >
+            <p class="form-msg"></p>
+        </div>
+        <div class="form-group form-gender">
+            <input name = "gender" type="radio" value = "male"> Nam
+            <input name = "gender" type="radio" value = "female"> Nữ
+            <input name = "gender" type="radio" value = "orther"> Khác
+            <p class="form-msg"></p>
+        </div>
+        <div class="form-accept">
+            <label class="container">
+                <input type="checkbox" checked="checked">
+                <span class="checkmark" ></span>
+            </label>
+            <p>Nhận thông báo về các tin tức & sự kiện mới nhất của chúng tôi. (Có thể hủy đăng ký bất kỳ lúc nào). </p>
+        </div>
+        <button class="btn-submit">
+            Đăng ký
+        </button>
+    </form>
+</body>
+    <script src = "./main.js"></script>
+    <script>
+        Validator({
+            form:"#form-1",
+            rule:[
+                Validator.isRequired("#fullname","họ tên"),
+                Validator.isRequired("#email","email"),
+                Validator.isEmail("#email"),
+                Validator.isRequired('input[name="gender"]',"giới tính"),
+                Validator.isRequired('#avatar'),
+                Validator.isMinLength("#password",6,"Mật khẩu"),
+                Validator.isSimilar("#password-repeat",function(){
+                    return document.querySelector('#password').value;
+                },"Mật khẩu")
+            ],
+        });
+    </script>
+</html>
