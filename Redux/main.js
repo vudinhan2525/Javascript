@@ -64,3 +64,16 @@ function render(){
     output.innerText = store.getState();
 }
 render();
+
+function arrToObj(arr) {
+    return arr.reduce((acc,cur)=>{
+       acc[cur[0]] = cur[1];
+       return acc;
+    },{})
+ }
+const obj1 = arrToObj([
+    ['name', 'Son Dang'], 
+    ['age', 21], 
+    ['address', 'Ha Noi']
+ ]);
+ console.log(obj1)
